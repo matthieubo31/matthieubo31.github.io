@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(24, 10, 48);
+}
+
+.nom {
+  color: rgb(34, 235, 145);
+  font-size:40px;
+  margin-left: 700px;
+}
+
+
+.ecole {
+  font-size:25px;
+  color: rgb(34, 235, 145);
+  margin-left: 600px;
+}
+
+.cursus {
+  font-size:25px;
+  color: rgb(34, 235, 145);
+  margin-left: 700px;
+}
