@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matthieu Boyaval – E-portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #0c1120;
+    --white: #131a2f;
+    --nav: #070a14;
+    --ink: #e6ebf7;
+    --muted: #9aa6c6;
+    --line: #232d4a;
+    --accent: #7f98ff;
+    --btn: #3a58f0;
+    --accent-soft: rgba(127,152,255,.16);
+    --head: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --nav-h: 64px;
+  }
+  html { color-scheme: dark; }
+  html[data-theme="light"] {
+    color-scheme: light;
+    --paper: #f2f5f9;
+    --white: #ffffff;
+    --nav: #101a33;
+    --ink: #101a33;
+    --muted: #55607a;
+    --line: #cfd7e4;
+    --accent: #2447f5;
+    --btn: #2447f5;
+    --accent-soft: #e3e9ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+  body {
+    font-family: var(--body);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  h1, h2, h3 { font-family: var(--head); line-height: 1.15; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  /* Navigation */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    height: var(--nav-h);
+    background: var(--nav);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 clamp(.5rem, 4vw, 3rem);
+  }
+  nav ul { display: flex; flex-wrap: nowrap; justify-content: center; list-style: none; gap: clamp(0rem, .5vw, .25rem); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav ul a {
+    display: block; padding: .45rem clamp(.2rem, 1vw, .6rem); border-radius: 6px; white-space: nowrap;
+    font-family: var(--head); font-weight: 500; font-size: clamp(.5rem, 2.2vw, .85rem);
+    color: #c9d2ea; text-decoration: none;
+    transition: background .2s, color .2s;
+  }
+  .theme-btn {
+    background: none; border: 1px solid #5b6a94; color: #c9d2ea; cursor: pointer;
+    border-radius: 6px; padding: .3rem clamp(.25rem, 1vw, .5rem); margin-left: clamp(.1rem, 1vw, .5rem);
+    font-size: clamp(.55rem, 2.2vw, .85rem); line-height: 1.2;
+  }
+  .theme-btn svg { display: block; width: clamp(.85rem, 3.4vw, 1.15rem); height: clamp(.85rem, 3.4vw, 1.15rem); }
+  .theme-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+  nav ul a:hover { background: rgba(255,255,255,.1); color: #fff; }
+  nav ul a.active { background: var(--btn); color: #fff; }
+
+  /* Layout */
+  section { padding: clamp(3.5rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem); }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  section:nth-of-type(even) { background: var(--white); }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: .35rem; }
+  h4 { font-family: var(--head); font-size: 1.15rem; font-weight: 700; line-height: 1.2; margin-bottom: .35rem; }
+  .subhead { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); }
+  .subhead:first-of-type { margin-top: 0; }
+  p + p { margin-top: 1rem; }
+  .lead { color: var(--muted); max-width: 62ch; margin-bottom: 2rem; }
+  .meta { font-family: var(--head); font-size: .9rem; color: var(--muted); }
+
+  /* Welcome: graph paper with a plotted curve */
+  #welcome {
+    min-height: calc(100vh - var(--nav-h) - 160px);
+    min-height: calc(100svh - var(--nav-h) - 160px);
+    display: flex; align-items: center;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    position: relative; overflow: hidden;
+  }
+  #welcome .wrap { position: relative; z-index: 1; }
+  #welcome h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 800; letter-spacing: -.03em; }
+  #welcome .tagline { font-size: 1.35rem; max-width: 36ch; margin-top: 1.25rem; background: var(--paper); display: inline-block; padding: .2rem .5rem .2rem 0; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(1.5rem, 5vw, 4rem); }
+  .hero-text { min-width: 0; }
+  #welcome h1 { font-size: clamp(1.9rem, 6vw, 4rem); overflow-wrap: anywhere; }
+  .photo {
+    position: relative; width: clamp(150px, 28vw, 320px); aspect-ratio: 4 / 5;
+    border-radius: 16px; overflow: hidden; background: var(--white); border: 1px solid var(--line);
+    display: grid; place-items: center; color: var(--muted);
+  }
+  .photo-placeholder { width: 55%; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .curve { position: absolute; left: 0; bottom: 8%; width: 100%; height: 45%; pointer-events: none; }
+  .curve path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: draw 3s ease-out .3s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .actions { margin-top: 2rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: .7rem 1.3rem; border-radius: 8px;
+    font-family: var(--head); font-weight: 700; text-decoration: none;
+    background: var(--btn); color: #fff; border: 2px solid var(--btn);
+    cursor: pointer; font-size: 1rem; transition: transform .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.ghost { background: transparent; color: var(--accent); border-color: var(--accent); }
+
+  /* CV link strip */
+  .cvbar { padding: 1.5rem clamp(1rem, 4vw, 3rem); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cvbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .cvbar p { max-width: 52ch; }
+
+  /* Content blocks */
+  .item { padding: 1.4rem 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 170px 1fr; gap: 1.5rem; }
+  .item:last-child { border-bottom: 1px solid var(--line); }
+  .item .when { font-family: var(--head); font-weight: 500; color: var(--muted); font-size: .95rem; padding-top: .2rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+  .tags span { background: var(--accent-soft); color: var(--accent); font-family: var(--head); font-size: .85rem; font-weight: 500; padding: .2rem .7rem; border-radius: 99px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem; }
+  section:nth-of-type(odd) .card { background: var(--white); }
+
+  .card a { overflow-wrap: anywhere; }
+  footer { background: var(--nav); border-top: 1px solid var(--line); color: #aab4d0; text-align: center; padding: 1.5rem; font-family: var(--head); font-size: .9rem; }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 .4rem; }
+    .item { grid-template-columns: 1fr; gap: .25rem; }
+    .hero-grid { gap: 1rem; }
+    .photo { width: clamp(100px, 28vw, 150px); border-radius: 12px; }
+    #welcome .tagline { font-size: 1.02rem; margin-top: .75rem; }
+    #welcome .actions { margin-top: 1.25rem; gap: .5rem; }
+    #welcome .btn { padding: .5rem .9rem; font-size: .85rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .curve path { animation: none; stroke-dashoffset: 0; }
+    .btn { transition: none; }
+  }
+</style>
+<script>
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <ul id="menu">
+    <li><a href="#welcome">Welcome</a></li>
+    <li><a href="#engineering">Engineering</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#mobility">Mobility</a></li>
+    <li><a href="#civic">Engagement</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button class="theme-btn" id="themeToggle" type="button"></button></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- 1. WELCOME -->
+<section id="welcome">
+  <svg class="curve" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,150 C100,0 200,0 300,150 S500,300 600,150 S800,0 900,150 S1100,300 1200,150"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1>Matthieu Boyaval</h1>
+      <p class="tagline">Engineering student at ENSEEIHT<br>Digital Science and Technology</p>
+      <div class="actions">
+        <a class="btn" href="#engineering">See my engineering work</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <!-- PHOTO: put your picture next to this file, named photo.jpg (or change the name below) -->
+    <figure class="photo">
+      <svg class="photo-placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="8.5" r="3.7"/><path d="M4.5 21c.6-4.2 3.6-6.5 7.5-6.5s6.9 2.3 7.5 6.5"/></svg>
+      <img src="photo.jpg" alt="Portrait of me" onerror="this.remove()">
+    </figure>
+  </div>
+  </section>
+
+<!-- CV LINK: replace the href below with the link to your CV -->
+<section id="cv-link" class="cvbar">
+  <div class="wrap cvbar-inner">
+    <p>The full picture of my education, experience and skills is in my CV.</p>
+    <a class="btn" href="cv.pdf" target="_blank" rel="noopener">Open my CV</a>
+  </div>
+</section>
+
+<!-- 2. ENGINEERING -->
+<section id="engineering">
+  <div class="wrap">
+    <h2>Engineering</h2>
+
+    <h3 class="subhead">Skills</h3>
+    <div class="grid">
+      <article class="card">
+        <h4>Programming</h4>
+        <div class="tags"><span>Python</span><span>C</span><span>Ada</span><span>OCaml</span><span>C++</span></div>
+      </article>
+      <article class="card">
+        <h4>Tools</h4>
+        <div class="tags"><span>Git and GitHub</span><span>VS Code</span><span>LaTeX</span><span>MATLAB</span></div>
+      </article>
+      <article class="card">
+        <h4>Working with others</h4>
+        <div class="tags"><span>Teamwork</span><span>Project management</span><span>Presenting</span><span>Problem solving</span></div>
+      </article>
+      <article class="card">
+        <h4>Languages</h4>
+        <div class="tags"><span>French</span><span>English: C1</span><span>German: B1</span></div>
+      </article>
+    </div>
+
+    <h3 class="subhead">Projects</h3>
+    <p class="empty">I don’t have any projects I find worth sharing YET.</p>
+  </div>
+</section>
+
+<!-- 3. CAREER -->
+<section id="career">
+  <div class="wrap">
+    <h2>Career</h2>
+    <p class="lead">My path so far.</p>
+    <div class="item">
+      <div class="when">2024 – 2026</div>
+      <div><h3>Classe préparatoire</h3><p>Lycée Pierre de Fermat, Toulouse</p></div>
+    </div>
+    <div class="item">
+      <div class="when">2026 – 2029</div>
+      <div><h3>Student at ENSEEIHT</h3></div>
+    </div>
+    <div class="item">
+      <div class="when">Next</div>
+      <div><h3>Coming soon</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. INTERNATIONAL MOBILITY -->
+<section id="mobility">
+  <div class="wrap">
+    <h2>Mobility</h2>
+
+    <h3 class="subhead">Mobility plans</h3>
+    <p>I’d like to travel to North America, especially Canada, to discover a different work environment and deepen both my engineering and communication skills.</p>
+
+    <h3 class="subhead">Past mobilities</h3>
+    <p class="empty">Coming soon</p>
+  </div>
+</section>
+
+<!-- 5. CIVIC ENGAGEMENT -->
+<section id="civic">
+  <div class="wrap">
+    <h2>Engagement</h2>
+    <p class="empty">Coming soon</p>
+  </div>
+</section>
+
+<!-- 6. OTHER ACTIVITIES -->
+<section id="activities">
+  <div class="wrap">
+    <h2>Activities</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Video games</h3>
+        <p>I play League of Legends, a 5v5 team strategy game that develops skills such as teamwork and adaptability.</p>
+      </article>
+      <article class="card">
+        <h3>Chess</h3>
+        <p>I play chess regularly, which develops several skills such as decision-making and analysis.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CONTACT: replace the placeholders with your own details -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="lead">You can reach me through any of these.</p>
+    <div class="grid">
+      <article class="card">
+        <h3>Email</h3>
+        <p><a href="mailto:matthieu.pourny@gmail.com">matthieu.pourny@gmail.com</a></p>
+      </article>
+      <article class="card">
+        <h3>Phone</h3>
+        <p><a href="tel:+33645707035">06 45 70 70 35</a></p>
+      </article>
+      <article class="card">
+        <h3>LinkedIn</h3>
+        <p><a href="https://www.linkedin.com/in/matthieu-boyaval-168130436/" target="_blank" rel="noopener">linkedin.com/in/matthieu-boyaval-168130436</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>© <span id="year"></span> Matthieu Boyaval. All rights reserved.</footer>
+
+<script>
+  // Light / dark mode
+  const themeBtn = document.getElementById('themeToggle');
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>';
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    themeBtn.innerHTML = ICON;
+    themeBtn.title = t === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+    themeBtn.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+  applyTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // Highlight the current section in the navigation bar
+  const links = [...document.querySelectorAll('#menu a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
